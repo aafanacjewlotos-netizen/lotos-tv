@@ -45,10 +45,10 @@ h1 strong{display:block;font-weight:800}
 .pill{padding:20px 28px;border-radius:30px;background:var(--accent);color:#06201f;font-size:29px;line-height:1.22;font-weight:600;overflow-wrap:anywhere}
 .pill.soft{background:rgba(255,255,255,.07);border:1px solid var(--line);color:var(--paper);font-weight:500}
 .bar{position:absolute;left:0;bottom:0;height:5px;width:100%;background:rgba(255,255,255,.06);z-index:4}
-.bar i{display:block;height:100%;width:0;background:var(--accent)}
+.bar i{display:block;height:100%;width:100%;background:var(--accent);transform:scaleX(0);transform-origin:0 0;will-change:transform}
 
 /* ---------- справа: расписание ---------- */
-aside{position:relative;border-radius:44px;padding:34px 36px 30px;background:rgba(255,255,255,.045);border:1px solid var(--line);backdrop-filter:blur(8px);display:flex;flex-direction:column;min-width:0}
+aside{position:relative;border-radius:44px;padding:34px 36px 30px;background:rgba(255,255,255,.045);border:1px solid var(--line);display:flex;flex-direction:column;min-width:0}
 .top{display:flex;justify-content:space-between;align-items:baseline;font-size:17px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(241,244,244,.75)}
 .top b{font-size:48px;letter-spacing:-.02em;font-weight:700;color:var(--accent)}
 h2{margin:26px 0 22px;font-size:60px;line-height:1;letter-spacing:-.03em;font-weight:300}
@@ -190,7 +190,7 @@ function showCard(initial){
     element('part').textContent=pages.length>1?(part+1)+' / '+pages.length:'';
     const words=pages[part].map(e=>e.text).join(' ').trim().split(/\s+/).length;
     const ms=Math.max(11000,words*430+2800);
-    const bar=element('progress');bar.style.transition='none';bar.style.width='0';bar.getBoundingClientRect();bar.style.transition='width '+ms+'ms linear';bar.style.width='100%';
+    const bar=element('progress');bar.style.transition='none';bar.style.transform='scaleX(0)';bar.getBoundingClientRect();bar.style.transition='transform '+ms+'ms linear';bar.style.transform='scaleX(1)';
     cardTimer=setTimeout(()=>{
       part+=1;
       if(part>=pages.length){part=0;current=(current+1)%cards.length}
